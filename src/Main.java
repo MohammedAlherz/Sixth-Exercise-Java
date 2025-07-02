@@ -21,7 +21,17 @@ public class Main {
         checkSumEquality(scanner);
 
         // Question 6: Reverse a word
-        reverseWord(scanner);
+        System.out.println("\n=== Question 6: Word Reversal ===");
+        try {
+            scanner.nextLine();
+            System.out.print("Input a word: ");
+            String word = scanner.nextLine();
+            reverseWord(word);
+            StringBuilder reversed = new StringBuilder(word).reverse();
+            System.out.println("Reverse word: " + reversed);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
         // Question 7: Even or odd check
         checkEvenOrOdd(scanner);
@@ -83,7 +93,6 @@ public class Main {
             }
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter valid integers");
-            scanner.nextLine(); // Clear invalid input
         }
     }
 
@@ -91,6 +100,7 @@ public class Main {
     public static void printMultiplicationTable(Scanner scanner) {
         System.out.println("\n=== Question 2: Multiplication Table ===");
         try {
+            scanner.nextLine();
             System.out.print("Input number: ");
             int num = scanner.nextInt();
 
@@ -99,7 +109,6 @@ public class Main {
             }
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter a valid integer");
-            scanner.nextLine();
         }
     }
 
@@ -107,6 +116,7 @@ public class Main {
     public static void calculateCircleProperties(Scanner scanner) {
         System.out.println("\n=== Question 3: Circle Properties ===");
         try {
+            scanner.nextLine();
             System.out.print("Enter radius: ");
             double radius = scanner.nextDouble();
 
@@ -121,7 +131,6 @@ public class Main {
             System.out.printf("Area: %.2f%n", area);
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter a valid number");
-            scanner.nextLine();
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -131,6 +140,7 @@ public class Main {
     public static void calculateAverage(Scanner scanner) {
         System.out.println("\n=== Question 4: Average Calculator ===");
         try {
+            scanner.nextLine();
             System.out.print("Enter the count of numbers: ");
             int count = scanner.nextInt();
 
@@ -148,7 +158,6 @@ public class Main {
             System.out.println("The average is: " + average);
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter valid integers");
-            scanner.nextLine();
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -158,6 +167,7 @@ public class Main {
     public static void checkSumEquality(Scanner scanner) {
         System.out.println("\n=== Question 5: Sum Equality Check ===");
         try {
+            scanner.nextLine();
             System.out.print("Input the first number: ");
             int first = scanner.nextInt();
             System.out.print("Input the second number: ");
@@ -169,25 +179,13 @@ public class Main {
             System.out.println("The result is: " + result);
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter valid integers");
-            scanner.nextLine();
         }
     }
 
     // Question 6: Reverse a word
-    public static void reverseWord(Scanner scanner) {
-        System.out.println("\n=== Question 6: Word Reversal ===");
-        try {
-            System.out.print("Input a word: ");
-            String word = scanner.next();
-
-            if (word.matches("\\d+")) {
-                throw new IllegalArgumentException("Input should be a word, not a number");
-            }
-
-            StringBuilder reversed = new StringBuilder(word).reverse();
-            System.out.println("Reverse word: " + reversed);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
+    public static void reverseWord(String word) throws IllegalArgumentException {
+        if (word.matches("\\d+")) {
+            throw new IllegalArgumentException("Input should be a word, not a number");
         }
     }
 
@@ -195,6 +193,7 @@ public class Main {
     public static void checkEvenOrOdd(Scanner scanner) {
         System.out.println("\n=== Question 7: Even/Odd Check ===");
         try {
+//            scanner.nextLine();
             System.out.print("Enter a number: ");
             int number = scanner.nextInt();
 
@@ -205,7 +204,6 @@ public class Main {
             }
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter a valid integer");
-            scanner.nextLine();
         }
     }
 
@@ -213,21 +211,32 @@ public class Main {
     public static void convertTemperature(Scanner scanner) {
         System.out.println("\n=== Question 8: Temperature Conversion ===");
         try {
+            scanner.nextLine();
             System.out.print("Enter temperature in Celsius: ");
             double celsius = scanner.nextDouble();
 
-            double fahrenheit = (celsius * 1.8) + 32;
+            double fahrenheit = convertToFahrenheit(celsius);
             System.out.printf("Temperature in Fahrenheit: %.2f%n", fahrenheit);
+
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter a valid number");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
+    public static double convertToFahrenheit(double celsius) throws IllegalArgumentException {
+        if (celsius < -273.15) {
+            throw new IllegalArgumentException("Temperature below absolute zero is not possible");
+        }
+        return (celsius * 1.8) + 32;
+    }
+
 
     // Question 9: Character at index
     public static void getCharacterAtIndex(Scanner scanner) {
         System.out.println("\n=== Question 9: Character at Index ===");
         try {
-            scanner.nextLine(); // Clear buffer
+            scanner.nextLine();
             System.out.print("Input a string: ");
             String text = scanner.nextLine();
             System.out.print("Input an index: ");
@@ -240,7 +249,6 @@ public class Main {
             System.out.println("Character at index " + index + ": " + text.charAt(index));
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter a valid integer for index");
-            scanner.nextLine();
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -250,6 +258,7 @@ public class Main {
     public static void calculateRectangleProperties(Scanner scanner) {
         System.out.println("\n=== Question 10: Rectangle Properties ===");
         try {
+            scanner.nextLine();
             System.out.print("Enter width: ");
             double width = scanner.nextDouble();
             System.out.print("Enter height: ");
@@ -266,7 +275,6 @@ public class Main {
             System.out.printf("Perimeter: %.2f%n", perimeter);
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter valid numbers");
-            scanner.nextLine();
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -276,29 +284,29 @@ public class Main {
     public static void compareTwoNumbers(Scanner scanner) {
         System.out.println("\n=== Question 11: Number Comparison ===");
         try {
+            scanner.nextLine();
             System.out.print("Input first integer: ");
             int num1 = scanner.nextInt();
             System.out.print("Input second integer: ");
             int num2 = scanner.nextInt();
 
-            if(num1 != num2){
-                System.out.println(num1 +"!="+num2);
+            if (num1 != num2) {
+                System.out.println(num1 + "!=" + num2);
             }
-            if(num1<num2){
-                System.out.println(num1 +"<"+num2);
+            if (num1 < num2) {
+                System.out.println(num1 + "<" + num2);
             }
-            if(num1>num2){
-                System.out.println(num1 +">"+num2);
+            if (num1 > num2) {
+                System.out.println(num1 + ">" + num2);
             }
-            if(num1<=num2){
-                System.out.println(num1 +"<="+num2);
+            if (num1 <= num2) {
+                System.out.println(num1 + "<=" + num2);
             }
-            if(num1>=num2){
-                System.out.println(num1 +">="+num2);
+            if (num1 >= num2) {
+                System.out.println(num1 + ">=" + num2);
             }
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter valid integers");
-            scanner.nextLine();
         }
     }
 
@@ -306,6 +314,7 @@ public class Main {
     public static void convertSeconds(Scanner scanner) {
         System.out.println("\n=== Question 12: Time Conversion ===");
         try {
+            scanner.nextLine();
             System.out.print("Input seconds: ");
             int totalSeconds = scanner.nextInt();
 
@@ -320,7 +329,6 @@ public class Main {
             System.out.printf("%d:%02d:%02d%n", hours, minutes, seconds);
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter a valid integer");
-            scanner.nextLine();
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -330,6 +338,7 @@ public class Main {
     public static void checkFourNumbersEquality(Scanner scanner) {
         System.out.println("\n=== Question 13: Four Numbers Equality ===");
         try {
+            scanner.nextLine();
             System.out.print("Input first number: ");
             int num1 = scanner.nextInt();
             System.out.print("Input second number: ");
@@ -346,7 +355,6 @@ public class Main {
             }
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter valid integers");
-            scanner.nextLine();
         }
     }
 
@@ -354,6 +362,7 @@ public class Main {
     public static void checkNumberSign(Scanner scanner) {
         System.out.println("\n=== Question 14: Number Sign Check ===");
         try {
+            scanner.nextLine();
             System.out.print("Input a number: ");
             int number = scanner.nextInt();
 
@@ -366,7 +375,6 @@ public class Main {
             }
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter a valid integer");
-            scanner.nextLine();
         }
     }
 
@@ -376,6 +384,7 @@ public class Main {
         int positiveCount = 0, negativeCount = 0, zeroCount = 0;
 
         try {
+            scanner.nextLine();
             System.out.println("Enter numbers (enter -1 to stop):");
             int number;
 
@@ -397,7 +406,6 @@ public class Main {
             System.out.println(negativeCount + " Negative");
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter valid integers");
-            scanner.nextLine();
         }
     }
 
@@ -405,6 +413,7 @@ public class Main {
     public static void reverseDigits(Scanner scanner) {
         System.out.println("\n=== Question 16: Reverse Digits ===");
         try {
+            scanner.nextLine();
             System.out.print("Input an integer: ");
             int number = scanner.nextInt();
 
@@ -416,7 +425,6 @@ public class Main {
             System.out.println(reversed);
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter a valid integer");
-            scanner.nextLine();
         }
     }
 
@@ -424,6 +432,7 @@ public class Main {
     public static void findMaxAndMin(Scanner scanner) {
         System.out.println("\n=== Question 17: Find Max and Min ===");
         try {
+            scanner.nextLine();
             System.out.print("Enter first number: ");
             int firstNumber = scanner.nextInt();
             int maxValue = firstNumber;
@@ -445,7 +454,6 @@ public class Main {
             System.out.println("Smallest number: " + minValue);
         } catch (InputMismatchException e) {
             System.out.println("Error: Please enter valid input");
-            scanner.nextLine();
         }
     }
 
@@ -453,7 +461,7 @@ public class Main {
     public static void countCharacterA(Scanner scanner) {
         System.out.println("\n=== Question 18: Count Character 'a' ===");
         try {
-            scanner.nextLine(); // Clear buffer
+            scanner.nextLine();
             System.out.print("Enter a string: ");
             String text = scanner.nextLine();
 
